@@ -42,8 +42,8 @@ function SignIn() {
     <div id="loginPage" className="bg-yellow">
         <div className="conatiner loginPage vhContainer ">
             <div className="side">
-                <a href="#"><img className="logoImg" src="https://upload.cc/i1/2022/03/23/rhefZ3.png" alt="logoImg" /></a>
-                <img className="d-m-n" src="https://upload.cc/i1/2022/03/23/tj3Bdk.png" alt="workImg" />
+                <a href="#"><img className="logoImg" src="https://raw.githubusercontent.com/jesswu1551/react_todo/main/src/assets/logo.png" alt="logoImg" /></a>
+                <img className="d-m-n" src="https://raw.githubusercontent.com/jesswu1551/react_todo/main/src/assets/todo.png" alt="workImg" />
             </div>
             <div>
                 <form className="formControls" onSubmit={handleSubmit(signIn)}>

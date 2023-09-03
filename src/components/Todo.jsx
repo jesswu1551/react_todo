@@ -163,10 +163,7 @@ function Todo() {
   return (<>
     <div id="todoListPage" className="bg-half">
       <nav>
-        <a href="#"><img className="logoImg" src="https://upload.cc/i1/2022/03/23/rhefZ3.png" alt="logoImg" /></a>
-        {/* <h1>
-          <a href="#">ONLINE TODO LIST</a>
-        </h1> */}
+        <a href="#"><img className="logoImg" src="https://raw.githubusercontent.com/jesswu1551/react_todo/main/src/assets/todo.png" alt="logoImg" /></a>
         <ul>
           <li className="todo_sm"><a><span>{nickname}的代辦</span></a></li>
           <li><a onClick={handleLogout}>登出</a></li>
