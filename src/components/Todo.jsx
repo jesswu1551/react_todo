@@ -12,7 +12,6 @@ function Todo() {
   const [newTodo, setNewTodo] = useState("");
   const [currStatus, setCurrStatus]= useState("全部");
   const [currTodos, setCurrTodos] = useState([]);
-  // const filterTodos = todos.filter(todo => currStatus === "待完成" ? !todo.status : (currStatus === "已完成" ? todo.status : todo));
 
   useEffect(() => {
     const token = document.cookie.split('; ').find((row) => row.startsWith('todo='))?.split('=')[1];
@@ -23,7 +22,6 @@ function Todo() {
 
   useEffect(() => {
     const newTodos = todos.filter(todo => currStatus === "待完成" ? !todo.status : (currStatus === "已完成" ? todo.status : todo));
-      console.log(newTodos);
       setCurrTodos(newTodos);
   }, [currStatus]);
 
@@ -39,7 +37,6 @@ function Todo() {
         showConfirmButton: false,
         timer: 1000
       }).then(() => { navigate('/'); });
-      console.log("checkout error: ", err);
     }
   }
 
@@ -49,7 +46,6 @@ function Todo() {
       setTodos(res.data.data);
 
       const newTodos = res.data.data.filter(todo => currStatus === "待完成" ? !todo.status : (currStatus === "已完成" ? todo.status : todo));
-      console.log(newTodos);
       setCurrTodos(newTodos);
     } catch (err) {
       Swal.fire({
@@ -69,7 +65,13 @@ function Todo() {
       setNewTodo("");
       getTodoList();
     } catch (err) {
-      console.log("add error: ", err);
+      Swal.fire({
+        title: '新增待辦事項失敗',
+        text: err.response.data.message,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(() => { getTodoList(); });
     }
   }
 
@@ -79,7 +81,13 @@ function Todo() {
 
       getTodoList();
     } catch (err) {
-      console.log("delete error: ", err);
+      Swal.fire({
+        title: '刪除待辦事項失敗',
+        text: err.response.data.message,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(() => { getTodoList(); });
     }
   }
 
@@ -89,7 +97,13 @@ function Todo() {
 
       getTodoList();
     } catch (err) {
-      console.log("toggle status error: ", err);
+      Swal.fire({
+        title: '待辦事項狀態變更失敗',
+        text: err.response.data.message,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(() => { getTodoList(); });
     }
   }
 
