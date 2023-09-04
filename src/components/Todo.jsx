@@ -58,7 +58,8 @@ function Todo() {
     }
   }
 
-  const addTodo = async() => {
+  const addTodo = async(e) => {
+    e.preventDefault();
     const todo = { content: newTodo };
     try {
       await axios.post(`${baseUrl}/todos`, todo);
@@ -163,7 +164,7 @@ function Todo() {
   return (<>
     <div id="todoListPage" className="bg-half">
       <nav>
-        <a href="#"><img className="logoImg" src="https://raw.githubusercontent.com/jesswu1551/react_todo/main/src/assets/todo.png" alt="logoImg" /></a>
+        <a href="#"><img className="logoImg" src="https://raw.githubusercontent.com/jesswu1551/react_todo/main/src/assets/logo.png" alt="logoImg" /></a>
         <ul>
           <li className="todo_sm"><a><span>{nickname}的代辦</span></a></li>
           <li><a onClick={handleLogout}>登出</a></li>
@@ -174,8 +175,8 @@ function Todo() {
           <div className="inputBox">
             <input type="text" value={newTodo} placeholder="新增待辦事項"
                    onChange={(e) => { setNewTodo(e.target.value); }}
-                   onKeyDown={(e) => { if (e.key === "Enter") { addTodo(); } }} />
-              <a href="#" onClick={() => addTodo()}><i className="fa fa-plus"></i></a>
+                   onKeyDown={(e) => { if (e.key === "Enter") { addTodo(e); } }} />
+              <a onClick={(e) => addTodo(e)}><i className="fa fa-plus"></i></a>
           </div>
           {
             todos.length ? (
