@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+const { VITE_APP_HOST } = import.meta.env;
 
-const baseUrl = "https://todolist-api.hexschool.io";
 function Todo() {
   const navigate = useNavigate();
   const navItems = ["全部", "待完成", "已完成"];
@@ -27,7 +27,7 @@ function Todo() {
 
   const checkOut = async() => {
     try {
-      const res = await axios.get(`${baseUrl}/users/checkout`);
+      const res = await axios.get(`${VITE_APP_HOST}/users/checkout`);
       setNickname(res.data.nickname);
     } catch (err) {
       Swal.fire({
@@ -42,7 +42,7 @@ function Todo() {
 
   const getTodoList = async() => {
     try {
-      const res = await axios.get(`${baseUrl}/todos`);
+      const res = await axios.get(`${VITE_APP_HOST}/todos`);
       setTodos(res.data.data);
 
       const newTodos = res.data.data.filter(todo => currStatus === "待完成" ? !todo.status : (currStatus === "已完成" ? todo.status : todo));
@@ -62,7 +62,7 @@ function Todo() {
     e.preventDefault();
     const todo = { content: newTodo };
     try {
-      await axios.post(`${baseUrl}/todos`, todo);
+      await axios.post(`${VITE_APP_HOST}/todos`, todo);
       setNewTodo("");
       getTodoList();
     } catch (err) {
@@ -78,7 +78,7 @@ function Todo() {
 
   const deleteTodo = async(id) => {
     try {
-      await axios.delete(`${baseUrl}/todos/${id}`);
+      await axios.delete(`${VITE_APP_HOST}/todos/${id}`);
 
       getTodoList();
     } catch (err) {
@@ -94,7 +94,7 @@ function Todo() {
 
   const toggleStatus = async(id) => {
     try {
-      await axios.patch(`${baseUrl}/todos/${id}/toggle`, {});
+      await axios.patch(`${VITE_APP_HOST}/todos/${id}/toggle`, {});
 
       getTodoList();
     } catch (err) {
@@ -110,7 +110,7 @@ function Todo() {
 
   const handleLogout = async() => {
     try {
-      await axios.post(`${baseUrl}/users/sign_out`, {});
+      await axios.post(`${VITE_APP_HOST}/users/sign_out`, {});
       Swal.fire({
         title: '登出成功',
         icon: 'success',
@@ -142,7 +142,7 @@ function Todo() {
 
       if (!swalRes.isConfirmed) { return; }
       for (let i = 0; i < deleteTodos.length; i++) {
-        await axios.delete(`${baseUrl}/todos/${deleteTodos[i].id}`);
+        await axios.delete(`${VITE_APP_HOST}/todos/${deleteTodos[i].id}`);
       }
       Swal.fire({
         title: '清除項目成功',

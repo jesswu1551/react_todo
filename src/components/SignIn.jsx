@@ -2,8 +2,8 @@ import axios from 'axios';
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useForm } from "react-hook-form";
+const { VITE_APP_HOST } = import.meta.env;
 
-const baseUrl = "https://todolist-api.hexschool.io";
 function SignIn() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -16,7 +16,7 @@ function SignIn() {
 
   const signIn = async(data) => {
     try {
-      const res = await axios.post(`${baseUrl}/users/sign_in`, data);
+      const res = await axios.post(`${VITE_APP_HOST}/users/sign_in`, data);
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       document.cookie = `todo=${res.data.token}; expires=${tomorrow.toUTCString()}`;

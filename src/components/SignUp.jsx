@@ -2,8 +2,8 @@ import axios from 'axios';
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useForm } from "react-hook-form";
+const { VITE_APP_HOST } = import.meta.env;
 
-const baseUrl = "https://todolist-api.hexschool.io";
 function SignUp() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -18,7 +18,7 @@ function SignUp() {
 
   const signUp = async(data) => {
     try {
-      await axios.post(`${baseUrl}/users/sign_up`, data);
+      await axios.post(`${VITE_APP_HOST}/users/sign_up`, data);
       Swal.fire({
         title: '註冊成功',
         icon: 'success',
